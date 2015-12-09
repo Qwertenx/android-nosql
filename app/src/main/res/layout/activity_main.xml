@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:fitsSystemWindows="true"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schemas.android.com/apk/res-auto "
+        android:contextClickable="true"
+        android:background="@drawable/fon">
+
+        <EditText
+            android:layout_width="match_parent" android:layout_height="50dp" android:hint="ID"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/editText"
+            android:background="#fe7b08" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get"
+            android:id="@+id/button2"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#ff9900" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create new"
+            android:id="@+id/button1"
+            android:background="#ff9100"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
