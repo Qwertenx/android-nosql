@@ -74,7 +74,7 @@ public class activity extends Activity {
                                 }, new Response.ErrorListener() {
 
                                     public void onErrorResponse(VolleyError volleyError) {
-                                        Toast toast = Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) "Error", Toast.LENGTH_LONG);
+                                        Toast toast = Toast.makeText((Context) activity.this.getApplicationContext(),volleyError.getMessage(), Toast.LENGTH_LONG);
                                         toast.show();
                                     }
                                 });
