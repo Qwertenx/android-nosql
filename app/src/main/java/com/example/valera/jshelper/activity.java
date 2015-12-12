@@ -17,7 +17,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+
 /**
  * Created by Valera_alt on 05-Dec-15.
  */
@@ -99,78 +106,86 @@ public class activity extends Activity {
             final String[] arrstring = new String[2];
             String string2 = "http://46.101.205.23:4444/test_db/" + this.getIntent().getStringExtra("id");
             Response.Listener<JSONObject> listener = new Response.Listener<JSONObject>() {
-                public void onResponse(JSONObject var1_1) {
-
+                public void onResponse(JSONObject jobject) {
+                    try {
+                        Iterator<String> iterator = jobject.keys();
+                        String key1 = iterator.next();
+                        editText.setText(key1);
+                        editText2.setText(jobject.getString(key1));
+                        String key2 = iterator.next();
+                        editText3.setText(key2);
+                        editText4.setText(jobject.getString(key2));
+                        if(iterator.hasNext())
+                        {
+                            String key3 = iterator.next();
+                            editText5.setText(key3);
+                            editText6.setText(jobject.getString(key3));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             };
             Response.ErrorListener errorListener = new Response.ErrorListener() {
 
                 public void onErrorResponse(VolleyError volleyError) {
-                    Toast toast = Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) "Invalid ID", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText((Context) activity.this.getApplicationContext(), "Invalid ID", Toast.LENGTH_LONG);
                     toast.show();
                     Intent intent = new Intent((Context) activity.this, (Class) MainActivity.class);
                     activity.this.finishActivity(0);
                     activity.this.startActivity(intent);
                 }
             };
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(0, string2, null, (Response.Listener) listener, errorListener);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, string2, null, (Response.Listener) listener, errorListener);
             requestQueue.add((Request) jsonObjectRequest);
             View.OnClickListener onClickListener = new View.OnClickListener() {
 
-                /*
-                 * Unable to fully structure code
-                 * Enabled aggressive exception aggregation
-                 */
                 public void onClick(View var1_1) {
                     switch (var1_1.getId()) {
-                        case 2131492973: {
-                            JSONObject jsonObject = null;
-                            if (!editText.getText().toString().equals((Object) "") && !editText2.getText().toString().equals((Object) ""))
-                                break;
-                            Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) "You should fill at least Key1 and Value1",Toast.LENGTH_LONG).show();
+                        case R.id.button4: {
+                            if (!editText.getText().toString().equals((Object) "") && !editText2.getText().toString().equals((Object) "")) {
+                                JSONObject jsonObject = new JSONObject();
+                                try {
+                                    jsonObject.put(editText.getText().toString(), (Object) editText2.getText().toString());
+                                    if (!editText3.getText().toString().equals((Object) "") && !editText4.getText().toString().equals((Object) "")) {
+                                        jsonObject.put(editText3.getText().toString(), (Object) editText4.getText().toString());
+                                    }
+                                    if (!editText5.getText().toString().equals((Object) "") && !editText6.getText().toString().equals((Object) "")) {
+                                        jsonObject.put(editText5.getText().toString(), (Object) editText6.getText().toString());
+                                    }
+                                } catch (Exception var5_9) {
+                                }
+                                    JsonObjectRequest json = new JsonObjectRequest(Request.Method.POST, "http://46.101.205.23:4444/test_db", jsonObject, (Response.Listener) new Response.Listener<JSONObject>() {
+
+                                        public void onResponse(JSONObject jSONObject) {
+                                            Toast toast = Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) jSONObject.toString(), Toast.LENGTH_LONG);
+                                            toast.show();
+                                        }
+                                    }, new Response.ErrorListener() {
+
+                                        public void onErrorResponse(VolleyError volleyError) {
+                                            Toast toast = Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) "Error", Toast.LENGTH_LONG);
+                                            toast.show();
+                                        }
+                                    });
+                                    requestQueue.add((Request) json);
+                                    Intent intent = new Intent((Context) activity.this, (Class) MainActivity.class);
+                                    activity.this.finishActivity(0);
+                                    activity.this.startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) "You should fill at least Key1 and Value1", Toast.LENGTH_LONG).show();
+                            }
                         }
-                        case 2131492974: {
+                        case R.id.button3: {
                             Intent intent = new Intent((Context) activity.this, (Class) MainActivity.class);
                             activity.this.finishActivity(0);
                             activity.this.startActivity(intent);
                             return;
                         }
                     }
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("_id", (Object) arrstring[0]);
-                        jsonObject.put("_rev", (Object) arrstring[1]);
-                        jsonObject.put(editText.getText().toString(), (Object) editText2.getText().toString());
-                        if (!editText3.getText().toString().equals((Object) "") && !editText4.getText().toString().equals((Object) "")) {
-                            jsonObject.put(editText3.getText().toString(), (Object) editText4.getText().toString());
-                        }
-                        if (!editText5.getText().toString().equals((Object) "") && !editText6.getText().toString().equals((Object) "")) {
-                            jsonObject.put(editText5.getText().toString(), (Object) editText6.getText().toString());
-                        }
-                    } catch (Exception var5_9) {
+
                     }
-                    lbl28:
-                    // 2 sources:
-                    do {
-                        JsonObjectRequest json = new JsonObjectRequest(1, "http://46.101.205.23:4444/test_db", jsonObject, (Response.Listener) new Response.Listener<JSONObject>() {
-
-                            public void onResponse(JSONObject jSONObject) {
-                                Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) jSONObject.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }, new Response.ErrorListener() {
-
-                            public void onErrorResponse(VolleyError volleyError) {
-                                Toast.makeText((Context) activity.this.getApplicationContext(), (CharSequence) "Error", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        requestQueue.add((Request) json);
-                        Intent intent = new Intent((Context) activity.this, (Class) MainActivity.class);
-                        activity.this.finishActivity(0);
-                        activity.this.startActivity(intent);
-                        break;
-                    } while (true);
-                }
-
             };
             button.setOnClickListener((View.OnClickListener) onClickListener);
             button2.setOnClickListener((View.OnClickListener) onClickListener);
