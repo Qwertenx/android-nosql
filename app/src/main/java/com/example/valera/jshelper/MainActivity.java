@@ -24,11 +24,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button button = (Button) this.findViewById(R.id.button1);
         Button button2 = (Button) this.findViewById(R.id.button2);
+        Button button3 = (Button) this.findViewById(R.id.button);
         final EditText edit = (EditText) this.findViewById(R.id.editText);
         View.OnClickListener onClickListener = new View.OnClickListener() {
 
             public void onClick(View view) {
                 switch (view.getId()) {
+                    case R.id.button: {
+                        if (edit.getText().toString().equals("")) {
+
+                            Toast toast = Toast.makeText(MainActivity.this.getApplicationContext(), "You should fill ID", Toast.LENGTH_LONG);
+                            toast.show();
+                            return;
+                        }
+                        Intent intent = new Intent((Context) MainActivity.this, (Class) image.class);
+                        intent.putExtra("id", edit.getText().toString());
+                        MainActivity.this.finishActivity(0);
+                        MainActivity.this.startActivity(intent);
+                        break;
+                    }
                     case R.id.button1: {
                         Intent intent = new Intent((Context) MainActivity.this, (Class) activity.class);
                         intent.putExtra("id", "");
@@ -54,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         };
         button.setOnClickListener(onClickListener);
         button2.setOnClickListener(onClickListener);
+        button3.setOnClickListener(onClickListener);
     }
 
     @Override
