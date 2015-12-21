@@ -10,7 +10,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,7 +35,19 @@ public class image extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
+        Button button = (Button) findViewById(R.id.button7);
+        final TextView textView =(TextView) findViewById(R.id.textView);
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(image.this,MainActivity.class);
+                finishActivity(0);
+                startActivity(intent);
+            }
+        };
+        button.setOnClickListener(onClickListener);
         final ImageView iv = (ImageView) findViewById(R.id.imageView);
+        textView.setText("Loading...");
         final RequestQueue requestAdministrator = Volley.newRequestQueue((Context) this);
         final StringBuilder[] url = {new StringBuilder("http://46.101.205.23:4444/test_db/" + this.getIntent().getStringExtra("id") + "/")};
         String string2 = "http://46.101.205.23:4444/test_db/" + this.getIntent().getStringExtra("id");
@@ -47,12 +61,13 @@ public class image extends AppCompatActivity {
                     ImageRequest ir = new ImageRequest(url[0].toString(), new Response.Listener<Bitmap>() {
                         @Override
                         public void onResponse(Bitmap response) {
-                            iv.setImageBitmap(response);
+                           iv.setImageBitmap(response);
+                            textView.setText("");
                         }
                     }, 0, 0, null, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            Toast toast = Toast.makeText((Context) getApplicationContext(), volleyError.toString(), Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText((Context) getApplicationContext(), "Invalid ID", Toast.LENGTH_LONG);
                             toast.show();
                         }
                     });

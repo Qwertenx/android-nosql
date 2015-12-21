@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) this.findViewById(R.id.button1);
         Button button2 = (Button) this.findViewById(R.id.button2);
         Button button3 = (Button) this.findViewById(R.id.button);
+        Button button4 = (Button) findViewById(R.id.button6);
         final EditText edit = (EditText) this.findViewById(R.id.editText);
         View.OnClickListener onClickListener = new View.OnClickListener() {
 
@@ -63,12 +64,20 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.finishActivity(0);
                         MainActivity.this.startActivity(intent);
                         break;
+                    case R.id.button6:
+                        Intent intent2 = new Intent((Context) MainActivity.this, (Class) pimage.class);
+                        intent2.putExtra("id", edit.getText().toString());
+                        MainActivity.this.finishActivity(0);
+                        MainActivity.this.startActivity(intent2);
+                        break;
                 }
+
             }
         };
         button.setOnClickListener(onClickListener);
         button2.setOnClickListener(onClickListener);
         button3.setOnClickListener(onClickListener);
+        button4.setOnClickListener(onClickListener);
     }
 
     @Override

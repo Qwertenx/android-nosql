@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity" />
+        <activity android:name=".pimage" />
         <activity
             android:name=".image"
             android:label="@string/title_activity_image"
