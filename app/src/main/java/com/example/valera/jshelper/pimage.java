@@ -157,7 +157,7 @@ public class pimage extends Activity {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         text.setText("");
-                                        if(error.toString().equals("com.android.volley.NoConnectionError: java.net.SocketException: sendto failed: EPIPE(Broken pipe)"))
+                                        if(error.toString().equals("com.android.volley.NoConnectionError: java.net.SocketException: sendto failed: EPIPE (Broken pipe)"))
                                         {
                                             Toast toast = Toast.makeText(getApplicationContext(), "Image successful uploaded", Toast.LENGTH_LONG);
                                             toast.show();
@@ -172,6 +172,10 @@ public class pimage extends Activity {
                             @Override
                             public byte[] getBody() throws AuthFailureError {
                                 return photoBytes;
+                            }
+                            @Override
+                            public String getBodyContentType() {
+                                return "image/png";
                             }
                         };
                         requestQueue.add(stringRequest);
@@ -240,6 +244,10 @@ public class pimage extends Activity {
                                 @Override
                                 public byte[] getBody() throws AuthFailureError {
                                     return photoBytes;
+                                }
+                                @Override
+                                public String getBodyContentType() {
+                                    return "image/png";
                                 }
                             };
                             requestQueue.add(stringRequest);
