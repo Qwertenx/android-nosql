@@ -3,20 +3,6 @@
 	<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:background="@drawable/fon">
 
-		<Button android:id="@+id/t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New Button" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:alpha="0" />
-		<Button android:id="@+id/y" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New Button" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:alpha="0"
-			android:layout_toRightOf="@+id/button5"
-			android:layout_toEndOf="@+id/button5" />
-
-		<Button android:id="@+id/p" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="New Button"
-			android:alpha="0"
-			android:layout_alignTop="@+id/editText6"
-			android:layout_alignParentRight="true"
-			android:layout_alignParentEnd="true"
-			android:layout_toRightOf="@+id/button5"
-			android:layout_toEndOf="@+id/button5" />
-
 		<Button android:id="@+id/button4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Submit"
 			android:layout_alignParentBottom="true"
 			android:layout_alignParentLeft="true"
@@ -30,15 +16,6 @@
 			android:layout_toEndOf="@+id/button5"
 			android:background="#ff9d00" />
 
-		<EditText
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/editText2"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true"
-			android:layout_toStartOf="@+id/button5"
-			android:layout_toLeftOf="@+id/button5" />
-
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -48,54 +25,96 @@
 			android:layout_centerHorizontal="true"
 			android:background="#ffa600" />
 
-		<EditText
+		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/editText3"
-			android:layout_alignParentTop="true"
-			android:layout_alignParentRight="true"
-			android:layout_alignParentEnd="true"
-			android:layout_alignLeft="@+id/y"
-			android:layout_alignStart="@+id/y" />
-
-		<EditText
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/editText4"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@+id/button5"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true" />
-
-		<EditText
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/editText5"
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:layout_alignParentEnd="true"
-			android:layout_toRightOf="@+id/button5"
-			android:layout_toEndOf="@+id/button5" />
-
-		<EditText
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/editText6"
-			android:layout_above="@+id/button5"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:id="@+id/textView3"
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true" />
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true"
-			android:layout_toLeftOf="@+id/button5"
-			android:layout_toStartOf="@+id/button5" />
+			android:layout_above="@+id/button4">
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:id="@+id/linear"
+			android:layout_above="@+id/button4"
+			android:weightSum="1">
 
-		<EditText
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/editText7"
-			android:layout_above="@+id/button3"
-			android:layout_alignRight="@+id/p"
-			android:layout_alignEnd="@+id/p"
-			android:layout_alignLeft="@+id/p"
-			android:layout_alignStart="@+id/p" />
+			<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/button5"
+                android:layout_toLeftOf="@+id/button5"
+				android:hint="Key 1" />
 
+			<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText3"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignLeft="@+id/y"
+                android:layout_alignStart="@+id/y"
+				android:layout_gravity="right"
+				android:hint="Value1" />
+
+			<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText4"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/button5"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+				android:hint="Key 2" />
+
+			<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText5"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/button5"
+                android:layout_toEndOf="@+id/button5"
+				android:layout_gravity="right"
+				android:hint="Value 2" />
+
+			<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText6"
+                android:layout_above="@+id/button5"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/button5"
+                android:layout_toStartOf="@+id/button5"
+				android:hint="Key 3" />
+
+			<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText7"
+                android:layout_above="@+id/button3"
+                android:layout_alignRight="@+id/p"
+                android:layout_alignEnd="@+id/p"
+                android:layout_alignLeft="@+id/p"
+                android:layout_alignStart="@+id/p"
+				android:hint="Value 3" />
+
+		</LinearLayout>
+		</ScrollView>
 	</RelativeLayout>
 </LinearLayout>

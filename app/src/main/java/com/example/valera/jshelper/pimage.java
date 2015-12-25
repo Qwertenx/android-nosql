@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -42,6 +43,7 @@ public class pimage extends Activity {
     EditText post;
     EditText attach;
     EditText name;
+    TextView text;
     private byte[] getBytes(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
         int bufferSize = 1024;
@@ -63,6 +65,7 @@ public class pimage extends Activity {
         post = (EditText) findViewById(R.id.editText8);
         attach = (EditText) findViewById(R.id.editText9);
         name = (EditText) findViewById(R.id.editText10);
+        text = (TextView) findViewById(R.id.textView2);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +114,7 @@ public class pimage extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final StringBuilder URL = new StringBuilder("http://46.101.205.23:4444/test_db/");
+        text.setText("Loading...");
         if (resultCode == RESULT_OK && requestCode == SELECT_PHOTO ) {
             Uri fullPhotoUri = data.getData();
 
@@ -144,6 +148,7 @@ public class pimage extends Activity {
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+                                        text.setText("");
                                         Toast toast = Toast.makeText(getApplicationContext(), "Response is: " + response, Toast.LENGTH_LONG);
                                         toast.show();
                                     }
@@ -151,8 +156,16 @@ public class pimage extends Activity {
                                 new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "Error: " + error.toString() , Toast.LENGTH_LONG);
-                                        toast.show();
+                                        text.setText("");
+                                        if(error.toString().equals("com.android.volley.NoConnectionError: java.net.SocketException: sendto failed: EPIPE(Broken pipe)"))
+                                        {
+                                            Toast toast = Toast.makeText(getApplicationContext(), "Image successful uploaded", Toast.LENGTH_LONG);
+                                            toast.show();
+                                        }
+                                        else {
+                                            Toast toast = Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_LONG);
+                                            toast.show();
+                                        }
                                     }
                                 })
                         {
@@ -203,6 +216,7 @@ public class pimage extends Activity {
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
+                                            text.setText("");
                                             Toast toast = Toast.makeText(getApplicationContext(), "Response is: " + response, Toast.LENGTH_LONG);
                                             toast.show();
                                         }
@@ -210,8 +224,16 @@ public class pimage extends Activity {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            Toast toast = Toast.makeText(getApplicationContext(), "Error: " + error.toString() , Toast.LENGTH_LONG);
-                                            toast.show();
+                                            text.setText("");
+                                            if(error.toString().equals("com.android.volley.NoConnectionError: java.net.SocketException: sendto failed: EPIPE (Broken pipe)"))
+                                            {
+                                                Toast toast = Toast.makeText(getApplicationContext(), "Image successful uploaded", Toast.LENGTH_LONG);
+                                                toast.show();
+                                            }
+                                            else{
+                                                Toast toast = Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_LONG);
+                                                toast.show();
+                                            }
                                         }
                                     })
                             {
@@ -226,6 +248,7 @@ public class pimage extends Activity {
                 Response.ErrorListener errorListener = new Response.ErrorListener() {
 
                     public void onErrorResponse(VolleyError volleyError) {
+                        text.setText("");
                         Toast toast = Toast.makeText(getApplicationContext(), "Invalid ID", Toast.LENGTH_LONG);
                         toast.show();
                     }
